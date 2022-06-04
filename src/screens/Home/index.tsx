@@ -1,11 +1,16 @@
-import { Button, Container, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { FC } from "react";
+import { ContainerCustom } from "../../components/Container";
+import { routes } from "../../routes";
 
 import GridOutfits from "./GridOutfits";
 
 const Home: FC = () => {
+    const router = useRouter();
+
     return (
-        <Container py="20px" mx="auto" maxWidth="1400px" px="20px">
+        <ContainerCustom>
             <Text
                 textAlign="center"
                 fontFamily="Prata"
@@ -17,6 +22,7 @@ const Home: FC = () => {
 
             <Flex marginTop="25px" justify="center">
                 <Button
+                    onClick={() => router.push(routes.NEW)}
                     maxWidth="250px"
                     w="full"
                     marginRight="5px"
@@ -24,13 +30,18 @@ const Home: FC = () => {
                 >
                     <Text fontWeight="900">NEW</Text>
                 </Button>
-                <Button maxWidth="250px" marginLeft="5px" w="full">
+                <Button
+                    onClick={() => router.push(routes.CREATE)}
+                    maxWidth="250px"
+                    marginLeft="5px"
+                    w="full"
+                >
                     <Text fontWeight="900">CREATE</Text>
                 </Button>
             </Flex>
 
             <GridOutfits />
-        </Container>
+        </ContainerCustom>
     );
 };
 

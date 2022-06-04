@@ -12,7 +12,7 @@ class MyDocument extends Document {
                         rel="apple-touch-icon"
                         href="/icons/icon-logo.png"
                     ></link>
-                    <meta name="theme-color" content="#fff" />
+                    <meta name="theme-color" content="#f7f7f3" />
 
                     <meta name="application-name" content="Outfit" />
                     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -71,7 +71,7 @@ class MyDocument extends Document {
                     <link
                         rel="mask-icon"
                         href="/icons/safari-pinned-tab.svg"
-                        color="#5bbad5"
+                        color="#f7f7f3"
                     />
                     <link rel="shortcut icon" href="/favicon.ico" />
                     <link
