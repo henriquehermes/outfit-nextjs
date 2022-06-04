@@ -5,14 +5,16 @@ import { ContainerCustom } from "../../components/Container";
 import EmailComponent from "../../components/Email";
 import HeaderComponent from "../../components/Header";
 import PasswordComponent from "../../components/Password";
+import ProfileComponent from "../../components/Profile";
 import { routes } from "../../routes";
 
 const EMAIL_ADDRESS = "EMAIL_ADDRESS";
 const PASSWORD = "PASSWORD";
 const CONFIRM_PASSWORD = "CONFIRM_PASSWORD";
+const PROFILE = "PROFILE";
 
 const SignUpPage: FC = () => {
-    const [steps, setSteps] = useState(PASSWORD);
+    const [steps, setSteps] = useState(PROFILE);
     const router = useRouter();
 
     const handleSteps = () => {
@@ -34,9 +36,12 @@ const SignUpPage: FC = () => {
                     <PasswordComponent
                         title="Confirm your password"
                         description="Use 8 or more characters with a mix of letters, numbers & symbols"
-                        buttonAction={() => setSteps(CONFIRM_PASSWORD)}
+                        buttonAction={() => setSteps(PROFILE)}
                     />
                 );
+
+            case PROFILE:
+                return <ProfileComponent />;
             default:
                 return (
                     <EmailComponent buttonAction={() => setSteps(PASSWORD)} />
@@ -51,6 +56,7 @@ const SignUpPage: FC = () => {
                     if (steps === EMAIL_ADDRESS) router.push(routes.HOME);
                     if (steps === PASSWORD) setSteps(EMAIL_ADDRESS);
                     if (steps === CONFIRM_PASSWORD) setSteps(PASSWORD);
+                    if (steps === PROFILE) setSteps(CONFIRM_PASSWORD);
                 }}
             />
             {handleSteps()}
