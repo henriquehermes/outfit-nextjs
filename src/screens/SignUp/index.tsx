@@ -14,7 +14,7 @@ const CONFIRM_PASSWORD = "CONFIRM_PASSWORD";
 const PROFILE = "PROFILE";
 
 const SignUpPage: FC = () => {
-    const [steps, setSteps] = useState(PROFILE);
+    const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const router = useRouter();
 
     const handleSteps = () => {

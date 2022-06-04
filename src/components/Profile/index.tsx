@@ -51,6 +51,7 @@ const ProfileComponent: React.FC = () => {
                     onClick={() => {
                         if (fileInput.current) fileInput.current.click();
                     }}
+                    objectFit="cover"
                     w="111px"
                     h="111px"
                     borderRadius="50%"
