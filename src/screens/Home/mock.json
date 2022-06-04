@@ -1,0 +1,34 @@
+{
+    "outfits": [
+        {
+            "id": 1,
+            "title": "SUMMER #1",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "image": "/mock/1.jpg"
+        },
+        {
+            "id": 2,
+            "title": "WINTER #1",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "image": "/mock/2.jpg"
+        },
+        {
+            "id": 3,
+            "title": "SUMMER #2",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "image": "/mock/2.jpg"
+        },
+        {
+            "id": 4,
+            "title": "SUMMER #3",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "image": "/mock/2.jpg"
+        },
+        {
+            "id": 5,
+            "title": "WINTER #2",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "image": "/mock/1.jpg"
+        }
+    ]
+}
