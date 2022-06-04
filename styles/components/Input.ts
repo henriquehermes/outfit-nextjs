@@ -5,13 +5,18 @@ const Input: ComponentMultiStyleConfig = {
     baseStyle: {
         field: {
             _disabled: {
-                bg: "gray.100",
-                borderColor: "gray.300",
+                bg: "transparent",
+                border: "none",
+                borderBottom: "1px solid",
+                borderColor: "black",
                 color: "gray.600",
                 _placeholder: {
                     color: "gray.600",
                 },
             },
+            border: "none",
+            borderBottom: "1px solid",
+            borderColor: "black",
         },
         addon: {
             color: "gray.700",
@@ -40,7 +45,7 @@ const Input: ComponentMultiStyleConfig = {
     variants: {
         round: {
             field: {
-                borderColor: "gray.100",
+                borderColor: "black",
                 borderWidth: 1,
                 borderRadius: "3xl",
             },

@@ -1,4 +1,12 @@
-import { Button, Container, Text } from "@chakra-ui/react";
+import {
+    Alert,
+    AlertDescription,
+    Button,
+    Container,
+    FormLabel,
+    Input,
+    Text,
+} from "@chakra-ui/react";
 import { FC } from "react";
 
 const Home: FC = () => {
@@ -13,7 +21,9 @@ const Home: FC = () => {
             <Button variant="outline">
                 <Text>Secundario</Text>
             </Button>
-            <input type="file" accept="image/x-png,image/jpeg,image/gif" />
+            <FormLabel>Cancelar</FormLabel>
+            <Input />
+            {/* <input type="file" accept="image/x-png,image/jpeg,image/gif" /> */}
         </Container>
     );
 };

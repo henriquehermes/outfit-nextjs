@@ -2,11 +2,11 @@ import type { ComponentSingleStyleConfig } from "@chakra-ui/theme";
 
 const Button: ComponentSingleStyleConfig = {
     baseStyle: {
-        borderRadius: "base",
+        borderRadius: "0",
         fontWeight: "semibold",
         whiteSpace: "pre-wrap",
         px: 6,
-        py: 3.5,
+        py: 3,
         _disabled: {
             border: "none",
             bg: "disabled.base",
@@ -29,16 +29,21 @@ const Button: ComponentSingleStyleConfig = {
     },
     variants: {
         solid: {
-            bg: "primary.base",
+            bg: "black",
             color: "white",
             _hover: {
-                bg: "primary.base",
+                bg: "black",
                 filter: "invert(0.2)",
             },
         },
         outline: {
-            borderColor: "primary.base",
-            color: "primary.base",
+            borderColor: "#37372D",
+            bg: "#eeede7",
+            color: "black",
+            _hover: {
+                bg: "#eeede7",
+                filter: "invert(0.1)",
+            },
         },
         ghost: {
             color: "primary.base",
