@@ -1,9 +1,10 @@
 export enum routes {
     HOME = "/",
     NEW = "/new",
-    NEW_ITEM = "/new-item",
     CREATE = "/create",
-    CREATE_OUTFIT = "/create-outfit",
+    LOGIN = "/login",
+    SIGN_UP = "/signup",
+    VIEW = "/view",
 }
 export type RouteParams = {};
 
