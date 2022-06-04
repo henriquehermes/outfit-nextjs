@@ -1,0 +1,39 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "name": "Hoodies",
+            "icon": "/icons/hoodie.png"
+        },
+        {
+            "id": 2,
+            "name": "Jackets",
+            "icon": "/icons/jacket.png"
+        },
+        {
+            "id": 3,
+            "name": "Shirts",
+            "icon": "/icons/shirt.png"
+        },
+        {
+            "id": 4,
+            "name": "T-Shirts",
+            "icon": "/icons/t-shirt.png"
+        },
+        {
+            "id": 5,
+            "name": "Pants",
+            "icon": "/icons/pants.png"
+        },
+        {
+            "id": 6,
+            "name": "Shorts",
+            "icon": "/icons/shorts.png"
+        },
+        {
+            "id": 7,
+            "name": "Sneakers",
+            "icon": "/icons/sneakers.png"
+        }
+    ]
+}

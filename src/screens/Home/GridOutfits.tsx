@@ -2,7 +2,7 @@ import { Box, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { GridItem } from "./interface";
 
-import mock from "./mock.json";
+import mock from "../../mocks/home.json";
 
 const GridOutfits: FC = () => {
     return (
