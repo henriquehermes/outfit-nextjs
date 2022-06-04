@@ -1,4 +1,6 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { theme } from "../../styles/theme";
 
 class MyDocument extends Document {
     render() {
@@ -8,7 +10,7 @@ class MyDocument extends Document {
                     <link rel="manifest" href="/manifest.json" />
                     <link
                         rel="apple-touch-icon"
-                        href="/icons/icon-logo.jpg"
+                        href="/icons/icon-logo.png"
                     ></link>
                     <meta name="theme-color" content="#fff" />
 
@@ -74,9 +76,12 @@ class MyDocument extends Document {
                     <link rel="shortcut icon" href="/favicon.ico" />
                     <link
                         rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=optional"
+                        href="https://fonts.googleapis.com/css?family=Inter:300,400,500,700&display=swap"
                     />
-
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+                        rel="stylesheet"
+                    />
                     <meta name="twitter:card" content="summary" />
                     <meta name="twitter:url" content="https://yourdomain.com" />
                     <meta name="twitter:title" content="Outfit" />
@@ -103,6 +108,9 @@ class MyDocument extends Document {
                     />
                 </Head>
                 <body>
+                    <ColorModeScript
+                        initialColorMode={theme.config.initialColorMode}
+                    />
                     <Main />
                     <NextScript />
                 </body>
