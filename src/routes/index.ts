@@ -1,11 +1,5 @@
 import type { NextRouter } from "next/router";
-import type {
-    routes,
-    RouteParams,
-    RouteQueries,
-    RouteData,
-    UrlObject,
-} from "./interface";
+import type { routes, RouteData, UrlObject } from "./interface";
 
 export function composeRoute<R extends routes>(
     route: R,
@@ -20,27 +14,6 @@ export function composeRoute<R extends routes>(
                   )
                 : data,
     };
-}
-
-export function composeManualRoute<R extends routes>(
-    route: R,
-    {
-        params,
-        queries,
-    }: {
-        params?: RouteParams[Extract<keyof RouteParams, R>];
-        queries?: RouteQueries[Extract<keyof RouteQueries, R>];
-    },
-): string {
-    let href = route as string;
-    if (params)
-        Object.entries(params).forEach(
-            ([key, value]) =>
-                (href = href.replace(`[${key}]`, value.toString())),
-        );
-    const search = new URLSearchParams(queries).toString();
-    href = search ? `${href}?${search}` : href;
-    return href;
 }
 
 export function parseRouteQuery<R extends routes>(
