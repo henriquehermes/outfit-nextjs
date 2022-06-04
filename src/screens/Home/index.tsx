@@ -1,4 +1,4 @@
-import { Container, Text } from "@chakra-ui/react";
+import { Button, Container, Text } from "@chakra-ui/react";
 import { FC } from "react";
 
 const Home: FC = () => {
@@ -7,6 +7,12 @@ const Home: FC = () => {
             <Text fontWeight="900" fontSize="26px" color="primary.base">
                 Outfit
             </Text>
+            <Button>
+                <Text>Primario</Text>
+            </Button>
+            <Button variant="outline">
+                <Text>Secundario</Text>
+            </Button>
             <input type="file" accept="image/x-png,image/jpeg,image/gif" />
         </Container>
     );
