@@ -9,7 +9,7 @@ const styles = {
         },
         input: {
             border: "none !important",
-            borderBottom: "2px solid black !important",
+            borderBottom: "1px solid black !important",
             borderRadius: "0 !important",
             paddingLeft: "0 !important",
             paddingRight: "0 !important",

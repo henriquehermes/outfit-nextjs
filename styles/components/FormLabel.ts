@@ -2,7 +2,7 @@ import type { ComponentSingleStyleConfig } from "@chakra-ui/theme";
 
 const FormLabel: ComponentSingleStyleConfig = {
     baseStyle: {
-        fontSize: "md",
+        fontSize: "13px",
         fontWeight: "regular",
         lineHeight: "base",
         color: "#b1b1af",
