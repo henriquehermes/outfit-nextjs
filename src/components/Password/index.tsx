@@ -1,12 +1,18 @@
 import { Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
-interface EmailProps {
+interface PasswordProps {
+    title: String;
+    description: String;
     buttonAction: any;
 }
 
-const EmailComponent: React.FC<EmailProps> = ({ buttonAction }) => {
-    const [emailError, setEmailError] = useState(false);
+const EmailComponent: React.FC<PasswordProps> = ({
+    title,
+    description,
+    buttonAction,
+}) => {
+    const [passwordError, setPasswordError] = useState(false);
 
     return (
         <Flex flexDirection="column" flex="1">
@@ -16,9 +22,7 @@ const EmailComponent: React.FC<EmailProps> = ({ buttonAction }) => {
                 textAlign="center"
                 fontFamily="Prata"
             >
-                Enter your
-                <br />
-                email Address
+                {title}
             </Text>
 
             <Text
@@ -27,13 +31,13 @@ const EmailComponent: React.FC<EmailProps> = ({ buttonAction }) => {
                 marginBottom="60px"
                 fontSize="15px"
             >
-                Please input your email address to continue
+                {description}
             </Text>
 
-            <FormLabel color={emailError ? "#9D2C2C" : "#000"}>{`Email ${
-                emailError ? " • Invaild email address" : ""
+            <FormLabel color={passwordError ? "#9D2C2C" : "#000"}>{`Password ${
+                passwordError ? " • Invaild password" : ""
             }`}</FormLabel>
-            <Input type="email" />
+            <Input type="password" />
 
             <Button onClick={buttonAction} variant="outline" marginTop="auto">
                 CONTINUE
