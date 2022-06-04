@@ -1,11 +1,11 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
 
 import mock from "../../mocks/categories.json";
 
 const ChooseCategory: React.FC<{ handleSubmit: any }> = ({ handleSubmit }) => {
     return (
-        <div>
+        <Box>
             <Text
                 my="40px"
                 fontSize="40px"
@@ -17,7 +17,12 @@ const ChooseCategory: React.FC<{ handleSubmit: any }> = ({ handleSubmit }) => {
             </Text>
 
             {mock.categories.map((item) => (
-                <Flex flexDirection="column" key={item.id}>
+                <Flex
+                    maxWidth="700px"
+                    mx="auto"
+                    flexDirection="column"
+                    key={item.id}
+                >
                     <Button
                         onClick={() => handleSubmit(item.name)}
                         display="flex"
@@ -46,7 +51,7 @@ const ChooseCategory: React.FC<{ handleSubmit: any }> = ({ handleSubmit }) => {
                     <Divider my="10px" />
                 </Flex>
             ))}
-        </div>
+        </Box>
     );
 };
 
