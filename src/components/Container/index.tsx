@@ -8,10 +8,10 @@ export const ContainerCustom: FC<{ children: React.ReactNode }> = ({
         minHeight="100vh"
         display="flex"
         flexDirection="column"
-        py="20px"
         mx="auto"
         maxWidth="1400px"
         px="20px"
+        paddingBottom="env(safe-area-inset-bottom)"
     >
         {children}
     </Container>

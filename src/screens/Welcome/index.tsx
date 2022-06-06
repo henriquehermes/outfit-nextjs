@@ -32,9 +32,8 @@ const WelcomePage: FC = () => {
 
             <Button
                 onClick={() => router.push(routes.SIGN_UP)}
-                marginBottom="50px"
                 variant="outline"
-                marginTop="15px"
+                my="15px"
             >
                 <Text>Sign Up</Text>
             </Button>
