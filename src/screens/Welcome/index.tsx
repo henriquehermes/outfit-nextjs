@@ -10,30 +10,27 @@ const WelcomePage: FC = () => {
     return (
         <ContainerCustom>
             <Text
-                my="40px"
+                paddingTop="100px"
                 fontSize="40px"
                 lineHeight="45px"
                 textAlign="center"
                 fontFamily="Prata"
-                marginTop="150px"
+                my="50px"
+                flexGrow="1"
             >
                 Welcome,
                 <br />
                 Outfit
             </Text>
 
-            <Button
-                onClick={() => router.push(routes.LOGIN)}
-                marginTop="auto"
-                variant="outline"
-            >
+            <Button onClick={() => router.push(routes.LOGIN)} variant="outline">
                 <Text>Login</Text>
             </Button>
 
             <Button
                 onClick={() => router.push(routes.SIGN_UP)}
                 variant="outline"
-                my="15px"
+                marginTop="15px"
             >
                 <Text>Sign Up</Text>
             </Button>

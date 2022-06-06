@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import theme from "../../styles";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -9,11 +9,13 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Head>
                 <title>Outfit</title>
                 <meta
+                    id="viewport"
                     name="viewport"
-                    content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+                    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
                 />
             </Head>
             <ChakraProvider theme={theme}>
+                <CSSReset />
                 <Component {...pageProps} />
             </ChakraProvider>
         </>
