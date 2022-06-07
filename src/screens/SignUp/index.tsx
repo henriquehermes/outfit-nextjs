@@ -25,7 +25,7 @@ const SignUpPage: FC = () => {
         lastName: "",
         email: "",
         inviteCode: "",
-        avatar: {
+        image: {
             key: "",
             originalname: "",
             location: "",
@@ -41,7 +41,7 @@ const SignUpPage: FC = () => {
         formData.append("email", user.email);
         formData.append("inviteCode", usr.inviteCode);
         formData.append("password", user.password);
-        formData.append("avatar", usr.avatar);
+        formData.append("image", usr.image);
 
         const response = await postUser(formData);
         console.log(response);

@@ -44,7 +44,7 @@ const ProfileComponent: React.FC<ProfileProps> = ({
                 firstName: firstNameInput?.current.value,
                 lastName: lastNameInput?.current.value,
                 inviteCode: inviteCodeInput?.current.value,
-                avatar: file,
+                image: file,
             });
         }
     }

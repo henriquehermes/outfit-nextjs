@@ -3,7 +3,7 @@ export interface User {
     lastName: string;
     email: string;
     inviteCode?: string;
-    avatar: Avatar;
+    image: Avatar;
     password: string;
 }
 
