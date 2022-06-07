@@ -3,12 +3,10 @@ import { useRef, useState } from "react";
 import isStrongPassword from "validator/lib/isStrongPassword";
 interface PasswordProps {
     buttonAction: any;
-    value: string;
 }
 
-const PasswordComponent: React.FC<PasswordProps> = ({
+const PasswordConfirmComponent: React.FC<PasswordProps> = ({
     buttonAction,
-    value,
 }) => {
     const [passwordError, setPasswordError] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -18,7 +16,7 @@ const PasswordComponent: React.FC<PasswordProps> = ({
             if (!isStrongPassword(inputRef.current.value)) {
                 return setPasswordError(true);
             } else {
-                buttonAction("password", inputRef.current.value);
+                buttonAction("confirmPassword", inputRef.current.value);
             }
         else setPasswordError(true);
     };
@@ -31,7 +29,7 @@ const PasswordComponent: React.FC<PasswordProps> = ({
                 textAlign="center"
                 fontFamily="Prata"
             >
-                Enter your password
+                Confirm your password
             </Text>
 
             <Text
@@ -40,14 +38,13 @@ const PasswordComponent: React.FC<PasswordProps> = ({
                 marginBottom="60px"
                 fontSize="15px"
             >
-                Use 8 or more characters with a mix of letters, numbers &
-                symbols
+                Repeat your password
             </Text>
 
             <FormLabel color={passwordError ? "#9D2C2C" : "#000"}>{`Password ${
-                passwordError ? " • Invaild password" : ""
+                passwordError ? " • Didn't match" : ""
             }`}</FormLabel>
-            <Input defaultValue={value} type="password" ref={inputRef} />
+            <Input type="password" ref={inputRef} />
 
             <Button onClick={handleSubmit} variant="outline" marginTop="auto">
                 CONTINUE
@@ -56,4 +53,4 @@ const PasswordComponent: React.FC<PasswordProps> = ({
     );
 };
 
-export default PasswordComponent;
+export default PasswordConfirmComponent;

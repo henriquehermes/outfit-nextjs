@@ -4,9 +4,10 @@ import isEmail from "validator/lib/isEmail";
 
 interface EmailProps {
     buttonAction: any;
+    value: string;
 }
 
-const EmailComponent: React.FC<EmailProps> = ({ buttonAction }) => {
+const EmailComponent: React.FC<EmailProps> = ({ buttonAction, value }) => {
     const [emailError, setEmailError] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +42,7 @@ const EmailComponent: React.FC<EmailProps> = ({ buttonAction }) => {
             <FormLabel color={emailError ? "#9D2C2C" : "#000"}>{`Email ${
                 emailError ? " • Invaild email address" : ""
             }`}</FormLabel>
-            <Input type="email" ref={inputRef} />
+            <Input defaultValue={value} type="email" ref={inputRef} />
 
             <Button onClick={handleSubmit} variant="outline" marginTop="auto">
                 CONTINUE

@@ -5,6 +5,8 @@ import { ContainerCustom } from "../../components/Container";
 import EmailComponent from "../../components/Email";
 import HeaderComponent from "../../components/Header";
 import PasswordComponent from "../../components/Password";
+import PasswordConfirmComponent from "../../components/Password/Confirm";
+
 import ProfileComponent from "../../components/Profile";
 import { routes } from "../../routes";
 
@@ -41,29 +43,31 @@ const SignUpPage: FC = () => {
     const handleSteps = () => {
         switch (steps) {
             case EMAIL_ADDRESS:
-                return <EmailComponent buttonAction={handleFlow} />;
+                return (
+                    <EmailComponent
+                        value={user.email}
+                        buttonAction={handleFlow}
+                    />
+                );
             case PASSWORD:
                 return (
                     <PasswordComponent
-                        title="Enter your password"
-                        description="Use 8 or more characters with a mix of letters, numbers & symbols"
+                        value={user.password}
                         buttonAction={handleFlow}
                     />
                 );
             case CONFIRM_PASSWORD:
-                return (
-                    <PasswordComponent
-                        title="Confirm your password"
-                        description="Repeat your password"
-                        buttonAction={handleFlow}
-                        isConfirmPassword
-                    />
-                );
+                return <PasswordConfirmComponent buttonAction={handleFlow} />;
 
             case PROFILE:
                 return <ProfileComponent buttonAction={createUser} />;
             default:
-                return <EmailComponent buttonAction={handleFlow} />;
+                return (
+                    <EmailComponent
+                        value={user.email}
+                        buttonAction={handleFlow}
+                    />
+                );
         }
     };
 
