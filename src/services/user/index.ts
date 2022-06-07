@@ -1,9 +1,9 @@
 import api from "../../config/api";
 
-export const postUser = async (data: any) => {
+export async function postUser(data: any) {
     try {
         await api.post("/user", data);
-    } catch (error) {
-        console.log(error);
+    } catch (error: any) {
+        return error;
     }
-};
+}

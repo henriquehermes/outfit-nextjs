@@ -13,7 +13,6 @@ import { useRef, useState } from "react";
 import { ProfileProps } from "./interface";
 
 const ProfileComponent: React.FC<ProfileProps> = ({
-    buttonAction,
     user,
     handleCreateUser,
 }) => {
@@ -40,15 +39,13 @@ const ProfileComponent: React.FC<ProfileProps> = ({
             lastNameInput.current &&
             inviteCodeInput.current
         ) {
-            buttonAction({
+            handleCreateUser({
                 ...user,
                 firstName: firstNameInput?.current.value,
                 lastName: lastNameInput?.current.value,
                 inviteCode: inviteCodeInput?.current.value,
                 avatar: file,
             });
-
-            handleCreateUser();
         }
     }
 

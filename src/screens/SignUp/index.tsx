@@ -9,6 +9,7 @@ import PasswordConfirmComponent from "../../components/Password/Confirm";
 
 import ProfileComponent from "../../components/Profile";
 import { routes } from "../../routes";
+import { postUser } from "../../services/user";
 
 const EMAIL_ADDRESS = "EMAIL_ADDRESS";
 const PASSWORD = "PASSWORD";
@@ -24,23 +25,32 @@ const SignUpPage: FC = () => {
         lastName: "",
         email: "",
         inviteCode: "",
-        avatar: "",
+        avatar: {
+            key: "",
+            originalname: "",
+            location: "",
+        },
         password: "",
     });
 
-    const createUser = () => {
+    const createUser = async (usr: any) => {
         const formData = new FormData();
 
-        formData.append("firstName", user.firstName);
-        formData.append("lastName", user.lastName);
+        formData.append("firstName", usr.firstName);
+        formData.append("lastName", usr.lastName);
         formData.append("email", user.email);
-        formData.append("inviteCode", user.inviteCode);
+        formData.append("inviteCode", usr.inviteCode);
         formData.append("password", user.password);
-        formData.append("avatar", user.avatar);
+        formData.append("avatar", usr.avatar);
 
-        console.log(formData);
+        const response = await postUser(formData);
+        console.log(response);
 
-        return true;
+        if (response.status === 200) {
+            router.push(routes.HOME);
+        } else {
+            setUser({ ...user, ...usr });
+        }
     };
 
     const handleFlow = (type: string, value: string) => {
@@ -79,9 +89,6 @@ const SignUpPage: FC = () => {
                 return (
                     <ProfileComponent
                         user={user}
-                        buttonAction={(usr: any) => {
-                            setUser(usr);
-                        }}
                         handleCreateUser={createUser}
                     />
                 );

@@ -3,12 +3,17 @@ export interface User {
     lastName: string;
     email: string;
     inviteCode?: string;
-    avatar: string;
+    avatar: Avatar;
     password: string;
 }
 
+interface Avatar {
+    key: string;
+    location: string;
+    originalname: string;
+}
+
 export interface ProfileProps {
-    buttonAction: any;
     user: User;
     handleCreateUser: any;
 }
