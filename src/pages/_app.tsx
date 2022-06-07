@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     name="viewport"
                     content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
                 />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
             </Head>
             <ChakraProvider theme={theme}>
                 <CSSReset />

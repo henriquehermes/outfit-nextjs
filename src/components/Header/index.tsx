@@ -9,7 +9,7 @@ type HeaderProps = {
 
 const HeaderComponent: FC<HeaderProps> = ({ title, buttonAction }) => {
     return (
-        <Flex my="10px" w="full" align="center">
+        <Flex marginTop="20px" marginBottom="10px" w="full" align="center">
             <ArrowBackIcon
                 w="8"
                 h="7"

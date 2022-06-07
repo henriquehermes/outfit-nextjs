@@ -14,38 +14,56 @@ const CONFIRM_PASSWORD = "CONFIRM_PASSWORD";
 const PROFILE = "PROFILE";
 
 const SignUpPage: FC = () => {
-    const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const router = useRouter();
+
+    const [steps, setSteps] = useState(EMAIL_ADDRESS);
+    const [user, setUser] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        inviteCode: "",
+        avatar: "",
+        password: "",
+    });
+
+    const handleFlow = (type: string, value: string) => {
+        setUser({ ...user, [type]: value });
+
+        if (steps === EMAIL_ADDRESS) return setSteps(PASSWORD);
+        if (steps === PASSWORD) return setSteps(CONFIRM_PASSWORD);
+        if (steps === CONFIRM_PASSWORD) return setSteps(PROFILE);
+    };
+
+    const createUser = () => {
+        return true;
+    };
 
     const handleSteps = () => {
         switch (steps) {
             case EMAIL_ADDRESS:
-                return (
-                    <EmailComponent buttonAction={() => setSteps(PASSWORD)} />
-                );
+                return <EmailComponent buttonAction={handleFlow} />;
             case PASSWORD:
                 return (
                     <PasswordComponent
                         title="Enter your password"
                         description="Use 8 or more characters with a mix of letters, numbers & symbols"
-                        buttonAction={() => setSteps(CONFIRM_PASSWORD)}
+                        buttonAction={handleFlow}
                     />
                 );
             case CONFIRM_PASSWORD:
                 return (
                     <PasswordComponent
                         title="Confirm your password"
-                        description="Use 8 or more characters with a mix of letters, numbers & symbols"
-                        buttonAction={() => setSteps(PROFILE)}
+                        description="Repeat your password"
+                        buttonAction={handleFlow}
+                        isConfirmPassword
                     />
                 );
 
             case PROFILE:
-                return <ProfileComponent />;
+                return <ProfileComponent buttonAction={createUser} />;
             default:
-                return (
-                    <EmailComponent buttonAction={() => setSteps(PASSWORD)} />
-                );
+                return <EmailComponent buttonAction={handleFlow} />;
         }
     };
 

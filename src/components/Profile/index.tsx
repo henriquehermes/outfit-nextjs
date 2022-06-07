@@ -10,7 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 
-const ProfileComponent: React.FC = () => {
+const ProfileComponent: React.FC<{ buttonAction: any }> = ({
+    buttonAction,
+}) => {
     const fileInput = useRef<HTMLInputElement>(null);
     const [imagePreview, setImagePreview] = useState("");
 
@@ -20,6 +22,11 @@ const ProfileComponent: React.FC = () => {
 
             setImagePreview(objectUrl);
         }
+    }
+
+    function handleSubmit() {
+        //todo
+        buttonAction();
     }
 
     return (
@@ -82,7 +89,13 @@ const ProfileComponent: React.FC = () => {
                 <Input disabled />
             </Box>
 
-            <Button mx="auto" w="full" maxW="500px" marginTop="auto">
+            <Button
+                onClick={handleSubmit}
+                mx="auto"
+                w="full"
+                maxW="500px"
+                marginTop="auto"
+            >
                 <Text>CONTINUE</Text>
             </Button>
         </Flex>

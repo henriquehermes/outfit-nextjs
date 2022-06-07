@@ -1,18 +1,30 @@
 import { Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface PasswordProps {
     title: String;
     description: String;
     buttonAction: any;
+    isConfirmPassword?: boolean;
 }
 
-const EmailComponent: React.FC<PasswordProps> = ({
+const PasswordComponent: React.FC<PasswordProps> = ({
     title,
     description,
     buttonAction,
+    isConfirmPassword = false,
 }) => {
     const [passwordError, setPasswordError] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleSubmit = () => {
+        if (inputRef.current)
+            buttonAction(
+                isConfirmPassword ? "confirmPassword" : "password",
+                inputRef.current.value,
+            );
+        else setPasswordError(true);
+    };
 
     return (
         <Flex flexDirection="column" flex="1">
@@ -37,13 +49,13 @@ const EmailComponent: React.FC<PasswordProps> = ({
             <FormLabel color={passwordError ? "#9D2C2C" : "#000"}>{`Password ${
                 passwordError ? " • Invaild password" : ""
             }`}</FormLabel>
-            <Input type="password" />
+            <Input type="password" ref={inputRef} />
 
-            <Button onClick={buttonAction} variant="outline" marginTop="auto">
+            <Button onClick={handleSubmit} variant="outline" marginTop="auto">
                 CONTINUE
             </Button>
         </Flex>
     );
 };
 
-export default EmailComponent;
+export default PasswordComponent;
