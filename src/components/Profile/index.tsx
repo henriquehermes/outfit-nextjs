@@ -10,23 +10,46 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 
-const ProfileComponent: React.FC<{ buttonAction: any }> = ({
+import { ProfileProps } from "./interface";
+
+const ProfileComponent: React.FC<ProfileProps> = ({
     buttonAction,
+    user,
+    handleCreateUser,
 }) => {
     const fileInput = useRef<HTMLInputElement>(null);
+    const firstNameInput = useRef<HTMLInputElement>(null);
+    const lastNameInput = useRef<HTMLInputElement>(null);
+    const inviteCodeInput = useRef<HTMLInputElement>(null);
+
     const [imagePreview, setImagePreview] = useState("");
+    const [file, setFile] = useState<any>(null);
 
     function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const objectUrl = URL.createObjectURL(e.target.files[0]);
 
+            setFile(e.target.files[0]);
             setImagePreview(objectUrl);
         }
     }
 
     function handleSubmit() {
-        //todo
-        buttonAction();
+        if (
+            firstNameInput.current &&
+            lastNameInput.current &&
+            inviteCodeInput.current
+        ) {
+            buttonAction({
+                ...user,
+                firstName: firstNameInput?.current.value,
+                lastName: lastNameInput?.current.value,
+                inviteCode: inviteCodeInput?.current.value,
+                avatar: file,
+            });
+
+            handleCreateUser();
+        }
     }
 
     return (
@@ -68,25 +91,18 @@ const ProfileComponent: React.FC<{ buttonAction: any }> = ({
                 />
             )}
 
-            <Text
-                textAlign="center"
-                fontSize="15px"
-                marginTop="15px"
-                marginBottom="35px"
-                fontFamily="Prata"
-            >
-                Lorem Ipsum
-            </Text>
-
-            <Box mx="auto" w="full" maxW="500px">
+            <Box marginTop="50px" mx="auto" w="full" maxW="500px">
                 <FormLabel>First Name</FormLabel>
-                <Input />
+                <Input ref={firstNameInput} type="text" />
 
                 <FormLabel marginTop="24px">Last Name</FormLabel>
-                <Input />
+                <Input ref={lastNameInput} type="text" />
+
+                <FormLabel marginTop="24px">Invitation Code</FormLabel>
+                <Input ref={inviteCodeInput} type="text" />
 
                 <FormLabel marginTop="24px">Email</FormLabel>
-                <Input disabled />
+                <Input value={user.email} disabled />
             </Box>
 
             <Button

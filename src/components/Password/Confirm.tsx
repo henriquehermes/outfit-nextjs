@@ -3,20 +3,25 @@ import { useRef, useState } from "react";
 import isStrongPassword from "validator/lib/isStrongPassword";
 interface PasswordProps {
     buttonAction: any;
+    password: string;
 }
 
 const PasswordConfirmComponent: React.FC<PasswordProps> = ({
     buttonAction,
+    password,
 }) => {
     const [passwordError, setPasswordError] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = () => {
         if (inputRef.current)
-            if (!isStrongPassword(inputRef.current.value)) {
+            if (
+                !isStrongPassword(inputRef.current.value) ||
+                password !== inputRef.current.value
+            ) {
                 return setPasswordError(true);
             } else {
-                buttonAction("confirmPassword", inputRef.current.value);
+                buttonAction();
             }
         else setPasswordError(true);
     };

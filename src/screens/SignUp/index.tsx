@@ -28,16 +28,27 @@ const SignUpPage: FC = () => {
         password: "",
     });
 
+    const createUser = () => {
+        const formData = new FormData();
+
+        formData.append("firstName", user.firstName);
+        formData.append("lastName", user.lastName);
+        formData.append("email", user.email);
+        formData.append("inviteCode", user.inviteCode);
+        formData.append("password", user.password);
+        formData.append("avatar", user.avatar);
+
+        console.log(formData);
+
+        return true;
+    };
+
     const handleFlow = (type: string, value: string) => {
         setUser({ ...user, [type]: value });
 
         if (steps === EMAIL_ADDRESS) return setSteps(PASSWORD);
         if (steps === PASSWORD) return setSteps(CONFIRM_PASSWORD);
         if (steps === CONFIRM_PASSWORD) return setSteps(PROFILE);
-    };
-
-    const createUser = () => {
-        return true;
     };
 
     const handleSteps = () => {
@@ -57,10 +68,23 @@ const SignUpPage: FC = () => {
                     />
                 );
             case CONFIRM_PASSWORD:
-                return <PasswordConfirmComponent buttonAction={handleFlow} />;
+                return (
+                    <PasswordConfirmComponent
+                        password={user.password}
+                        buttonAction={() => setSteps(PROFILE)}
+                    />
+                );
 
             case PROFILE:
-                return <ProfileComponent buttonAction={createUser} />;
+                return (
+                    <ProfileComponent
+                        user={user}
+                        buttonAction={(usr: any) => {
+                            setUser(usr);
+                        }}
+                        handleCreateUser={createUser}
+                    />
+                );
             default:
                 return (
                     <EmailComponent
