@@ -24,6 +24,7 @@ const LoginPage: FC = () => {
 
     const { setUserData } = useApplicationContext();
 
+    const [isLoading, setIsLoading] = useState(false);
     const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const [user, setUser] = useState({
         email: "",
@@ -31,6 +32,8 @@ const LoginPage: FC = () => {
     });
 
     const handleSubmit = async (type: string, password: string) => {
+        setIsLoading(true);
+
         const response = await postLogin({
             email: user.email,
             password,
@@ -55,8 +58,10 @@ const LoginPage: FC = () => {
                 status: "error",
                 duration: 9000,
                 isClosable: true,
+                position: "top",
             });
         }
+        setIsLoading(false);
     };
 
     const handleFlow = (type: string, value: string) => {
@@ -80,6 +85,7 @@ const LoginPage: FC = () => {
                         value={user.password}
                         description="To continue, first verify it’s you"
                         buttonAction={handleSubmit}
+                        isLoading={isLoading}
                     />
                 );
             default:

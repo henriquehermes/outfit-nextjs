@@ -5,12 +5,14 @@ interface PasswordProps {
     buttonAction: any;
     value: string;
     description?: string;
+    isLoading?: boolean;
 }
 
 const PasswordComponent: React.FC<PasswordProps> = ({
     buttonAction,
     description,
     value,
+    isLoading = false,
 }) => {
     const [passwordError, setPasswordError] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +62,12 @@ const PasswordComponent: React.FC<PasswordProps> = ({
             }`}</FormLabel>
             <Input defaultValue={value} type="password" ref={inputRef} />
 
-            <Button onClick={handleSubmit} variant="outline" marginTop="auto">
+            <Button
+                isLoading={isLoading}
+                onClick={handleSubmit}
+                variant="outline"
+                marginTop="auto"
+            >
                 CONTINUE
             </Button>
         </Flex>

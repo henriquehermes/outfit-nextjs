@@ -11,6 +11,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
 
     const [imagePreview, setImagePreview] = useState("");
     const [file, setFile] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
@@ -29,6 +30,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
                 status: "error",
                 duration: 9000,
                 isClosable: true,
+                position: "top",
             });
         } else {
             const formData = new FormData();
@@ -36,6 +38,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
             formData.append("category", category);
             formData.append("image", file);
 
+            setIsLoading(true);
             const response = await postItem(formData);
 
             if (response?.status === 200) {
@@ -45,6 +48,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
                     status: "success",
                     duration: 9000,
                     isClosable: true,
+                    position: "top",
                 });
 
                 router.push(routes.HOME);
@@ -55,8 +59,10 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
                     status: "error",
                     duration: 9000,
                     isClosable: true,
+                    position: "top",
                 });
             }
+            setIsLoading(false);
         }
     };
 
@@ -83,6 +89,8 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
             {imagePreview && (
                 <Image
                     maxWidth="500"
+                    maxHeight="500"
+                    objectFit="cover"
                     h="auto"
                     w="full"
                     border="1px solid black"
@@ -92,6 +100,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
             )}
 
             <Button
+                disabled={isLoading}
                 variant="outline"
                 onClick={() => {
                     if (fileInput.current) fileInput.current.click();
@@ -107,6 +116,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
             </Button>
 
             <Button
+                isLoading={isLoading}
                 onClick={handleSubmit}
                 maxWidth="500px"
                 marginTop="auto"

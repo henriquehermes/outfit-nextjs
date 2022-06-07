@@ -24,6 +24,7 @@ const SignUpPage: FC = () => {
     const [_, setCookie] = useCookies(["token"]);
 
     const [steps, setSteps] = useState(EMAIL_ADDRESS);
+    const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",
@@ -47,6 +48,7 @@ const SignUpPage: FC = () => {
         formData.append("password", user.password);
         formData.append("image", usr.image);
 
+        setIsLoading(true);
         const response = await postUser(formData);
 
         if (response?.status === 200) {
@@ -64,6 +66,7 @@ const SignUpPage: FC = () => {
                 status: "success",
                 duration: 9000,
                 isClosable: true,
+                position: "top",
             });
 
             router.push(routes.HOME);
@@ -76,8 +79,10 @@ const SignUpPage: FC = () => {
                 status: "error",
                 duration: 9000,
                 isClosable: true,
+                position: "top",
             });
         }
+        setIsLoading(false);
     };
 
     const handleFlow = (type: string, value: string) => {
@@ -117,6 +122,7 @@ const SignUpPage: FC = () => {
                     <ProfileComponent
                         user={user}
                         handleCreateUser={createUser}
+                        isLoading={isLoading}
                     />
                 );
             default:

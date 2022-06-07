@@ -14,6 +14,7 @@ import { ProfileProps } from "./interface";
 
 const ProfileComponent: React.FC<ProfileProps> = ({
     user,
+    isLoading,
     handleCreateUser,
 }) => {
     const fileInput = useRef<HTMLInputElement>(null);
@@ -52,6 +53,7 @@ const ProfileComponent: React.FC<ProfileProps> = ({
     return (
         <Flex flexDirection="column" flex="1" paddingTop="40px">
             <Button
+                disabled={isLoading}
                 display={imagePreview ? "none" : "block"}
                 variant="unstyled"
                 onClick={() => {
@@ -76,7 +78,8 @@ const ProfileComponent: React.FC<ProfileProps> = ({
             {imagePreview && (
                 <Image
                     onClick={() => {
-                        if (fileInput.current) fileInput.current.click();
+                        if (fileInput.current && !isLoading)
+                            fileInput.current.click();
                     }}
                     objectFit="cover"
                     w="111px"
@@ -103,6 +106,7 @@ const ProfileComponent: React.FC<ProfileProps> = ({
             </Box>
 
             <Button
+                isLoading={isLoading}
                 onClick={handleSubmit}
                 mx="auto"
                 w="full"

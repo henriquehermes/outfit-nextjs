@@ -16,4 +16,5 @@ interface Avatar {
 export interface ProfileProps {
     user: User;
     handleCreateUser: any;
+    isLoading: boolean;
 }
