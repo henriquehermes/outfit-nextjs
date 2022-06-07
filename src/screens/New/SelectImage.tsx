@@ -1,17 +1,64 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import { routes } from "../../routes";
+import { postItem } from "../../services/item";
 
 const SelectImage: React.FC<{ category: string }> = ({ category }) => {
     const fileInput = useRef<HTMLInputElement>(null);
+    const toast = useToast();
+    const router = useRouter();
+
     const [imagePreview, setImagePreview] = useState("");
+    const [file, setFile] = useState<any>(null);
 
     function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const objectUrl = URL.createObjectURL(e.target.files[0]);
 
+            setFile(e.target.files[0]);
             setImagePreview(objectUrl);
         }
     }
+
+    const handleSubmit = async () => {
+        if (!file || !category) {
+            toast({
+                title: "Error",
+                description: "Select one image",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+            });
+        } else {
+            const formData = new FormData();
+
+            formData.append("category", category);
+            formData.append("image", file);
+
+            const response = await postItem(formData);
+
+            if (response?.status === 200) {
+                toast({
+                    title: "Item created",
+                    description: "We've created your item for you",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                });
+
+                router.push(routes.HOME);
+            } else {
+                toast({
+                    title: "Error",
+                    description: response?.response?.data?.message,
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                });
+            }
+        }
+    };
 
     return (
         <Flex flex="1" flexDirection="column" align="center" justify="center">
@@ -59,7 +106,12 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
                 select an image
             </Button>
 
-            <Button maxWidth="500px" marginTop="auto" width="full">
+            <Button
+                onClick={handleSubmit}
+                maxWidth="500px"
+                marginTop="auto"
+                width="full"
+            >
                 <Text>SAVE</Text>
             </Button>
         </Flex>

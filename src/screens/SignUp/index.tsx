@@ -59,8 +59,8 @@ const SignUpPage: FC = () => {
             });
 
             toast({
-                title: "Account created.",
-                description: "We've created your account for you.",
+                title: "Account created",
+                description: "We've created your account for you",
                 status: "success",
                 duration: 9000,
                 isClosable: true,
@@ -71,7 +71,7 @@ const SignUpPage: FC = () => {
             setUser({ ...user, ...usr });
 
             toast({
-                title: "Error.",
+                title: "Error",
                 description: response?.response?.data?.message,
                 status: "error",
                 duration: 9000,

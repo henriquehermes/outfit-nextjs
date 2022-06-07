@@ -7,6 +7,10 @@ import { ContainerCustom } from "../../components/Container";
 import EmailComponent from "../../components/Email";
 import HeaderComponent from "../../components/Header";
 import PasswordComponent from "../../components/Password";
+import {
+    useApplicationContext,
+    withApplicationContext,
+} from "../../contexts/application";
 import { routes } from "../../routes";
 import { postLogin } from "../../services/user";
 
@@ -17,6 +21,8 @@ const LoginPage: FC = () => {
     const toast = useToast();
     const router = useRouter();
     const [_, setCookie] = useCookies(["token"]);
+
+    const { setUserData } = useApplicationContext();
 
     const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const [user, setUser] = useState({
@@ -39,10 +45,12 @@ const LoginPage: FC = () => {
                 sameSite: true,
             });
 
+            setUserData(response.data.user);
+
             router.push(routes.HOME);
         } else {
             toast({
-                title: "Error.",
+                title: "Error",
                 description: response?.response?.data?.message,
                 status: "error",
                 duration: 9000,
@@ -97,4 +105,4 @@ const LoginPage: FC = () => {
     );
 };
 
-export default LoginPage;
+export default withApplicationContext(LoginPage);
