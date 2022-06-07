@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
 
@@ -18,6 +19,7 @@ const PROFILE = "PROFILE";
 
 const SignUpPage: FC = () => {
     const router = useRouter();
+    const toast = useToast();
 
     const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const [user, setUser] = useState({
@@ -44,9 +46,16 @@ const SignUpPage: FC = () => {
         formData.append("image", usr.image);
 
         const response = await postUser(formData);
-        console.log(response);
 
-        if (response.status === 200) {
+        if (response?.status === 200) {
+            toast({
+                title: "Account created.",
+                description: "We've created your account for you.",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+            });
+
             router.push(routes.HOME);
         } else {
             setUser({ ...user, ...usr });

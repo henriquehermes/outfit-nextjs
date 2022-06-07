@@ -4,10 +4,12 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 interface PasswordProps {
     buttonAction: any;
     value: string;
+    description?: string;
 }
 
 const PasswordComponent: React.FC<PasswordProps> = ({
     buttonAction,
+    description,
     value,
 }) => {
     const [passwordError, setPasswordError] = useState(false);
@@ -47,8 +49,10 @@ const PasswordComponent: React.FC<PasswordProps> = ({
                 marginBottom="60px"
                 fontSize="15px"
             >
-                Use 8 or more characters with a mix of letters, numbers &
-                symbols
+                {`${
+                    description ||
+                    "Use 8 or more characters with a mix of letters, numbers & symbols"
+                }`}
             </Text>
 
             <FormLabel color={passwordError ? "#9D2C2C" : "#000"}>{`Password ${

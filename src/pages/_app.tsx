@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import theme from "../../styles";
+import { CookiesProvider } from "react-cookie";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -15,10 +16,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
             </Head>
-            <ChakraProvider theme={theme}>
-                <CSSReset />
-                <Component {...pageProps} />
-            </ChakraProvider>
+            <CookiesProvider>
+                <ChakraProvider theme={theme}>
+                    <CSSReset />
+                    <Component {...pageProps} />
+                </ChakraProvider>
+            </CookiesProvider>
         </>
     );
 }
