@@ -24,7 +24,14 @@ const PasswordComponent: React.FC<PasswordProps> = ({
     };
 
     return (
-        <Flex flexDirection="column" flex="1">
+        <Flex
+            mx="auto"
+            w="full"
+            maxW="500px"
+            flexDirection="column"
+            flex="1"
+            paddingTop="40px"
+        >
             <Text
                 marginTop="40px"
                 fontSize="40px"
