@@ -1,6 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
+import { useCookies } from "react-cookie";
 
 import { ContainerCustom } from "../../components/Container";
 import EmailComponent from "../../components/Email";
@@ -20,6 +21,7 @@ const PROFILE = "PROFILE";
 const SignUpPage: FC = () => {
     const router = useRouter();
     const toast = useToast();
+    const [_, setCookie] = useCookies(["token"]);
 
     const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const [user, setUser] = useState({
@@ -48,6 +50,14 @@ const SignUpPage: FC = () => {
         const response = await postUser(formData);
 
         if (response?.status === 200) {
+            const dateToConvertInSeconds = new Date(response.data.expiresAt);
+
+            setCookie("token", JSON.stringify(response.data.token), {
+                path: "/",
+                maxAge: dateToConvertInSeconds.getTime() / 1000,
+                sameSite: true,
+            });
+
             toast({
                 title: "Account created.",
                 description: "We've created your account for you.",
@@ -59,6 +69,14 @@ const SignUpPage: FC = () => {
             router.push(routes.HOME);
         } else {
             setUser({ ...user, ...usr });
+
+            toast({
+                title: "Error.",
+                description: response?.response?.data?.message,
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+            });
         }
     };
 

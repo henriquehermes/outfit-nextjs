@@ -31,9 +31,11 @@ const LoginPage: FC = () => {
         });
 
         if (response?.status === 200) {
-            setCookie("token", JSON.stringify(response.token), {
+            const dateToConvertInSeconds = new Date(response.data.expiresAt);
+
+            setCookie("token", JSON.stringify(response.data.token), {
                 path: "/",
-                maxAge: response.expiresAt,
+                maxAge: dateToConvertInSeconds.getTime() / 1000,
                 sameSite: true,
             });
 
