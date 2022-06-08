@@ -1,6 +1,10 @@
 import { Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import {
+    useApplicationContext,
+    withApplicationContext,
+} from "../../contexts/application";
 import { routes } from "../../routes";
 import { postItem } from "../../services/item";
 
@@ -12,6 +16,8 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
     const [imagePreview, setImagePreview] = useState("");
     const [file, setFile] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    const { userID } = useApplicationContext();
 
     function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
@@ -37,6 +43,7 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
 
             formData.append("category", category);
             formData.append("image", file);
+            formData.append("userID", userID);
 
             setIsLoading(true);
             const response = await postItem(formData);
@@ -128,4 +135,4 @@ const SelectImage: React.FC<{ category: string }> = ({ category }) => {
     );
 };
 
-export default SelectImage;
+export default withApplicationContext(SelectImage);

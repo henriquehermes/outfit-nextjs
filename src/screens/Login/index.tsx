@@ -7,6 +7,7 @@ import { ContainerCustom } from "../../components/Container";
 import EmailComponent from "../../components/Email";
 import HeaderComponent from "../../components/Header";
 import PasswordComponent from "../../components/Password";
+import api from "../../config/api";
 import {
     useApplicationContext,
     withApplicationContext,
@@ -22,13 +23,12 @@ const LoginPage: FC = () => {
     const router = useRouter();
     const [_, setCookie] = useCookies(["token"]);
 
-    const { setUserData } = useApplicationContext();
-
     const [isLoading, setIsLoading] = useState(false);
     const [steps, setSteps] = useState(EMAIL_ADDRESS);
     const [user, setUser] = useState({
         email: "",
         password: "",
+        remember: false,
     });
 
     const handleSubmit = async (type: string, password: string) => {
@@ -37,6 +37,7 @@ const LoginPage: FC = () => {
         const response = await postLogin({
             email: user.email,
             password,
+            remember: user.remember,
         });
 
         if (response?.status === 200) {
@@ -48,7 +49,9 @@ const LoginPage: FC = () => {
                 sameSite: true,
             });
 
-            setUserData(response.data.user);
+            api.defaults.headers.common["x-access-token"] = response.data.token;
+
+            localStorage.setItem("userID", response.data.user._id);
 
             router.push(routes.HOME);
         } else {

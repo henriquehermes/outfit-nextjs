@@ -10,17 +10,16 @@ import {
 import { ContextType, Props } from "./interface";
 
 const ApplicationContext = createContext<ContextType>({
-    userData: null,
+    userID: "",
 });
 
 const ApplicationContextProvider: FC<Props> = ({ children }): ReactElement => {
-    const [userData, setUserData] = useState();
+    const tempID = localStorage.getItem("userID");
 
     return (
         <ApplicationContext.Provider
             value={{
-                setUserData,
-                userData,
+                userID: tempID || "",
             }}
         >
             {children}

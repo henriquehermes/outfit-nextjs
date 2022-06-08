@@ -7,7 +7,7 @@ export interface User {
     password: string;
 }
 
-interface Avatar {
+export interface Avatar {
     key: string;
     location: string;
     originalname: string;

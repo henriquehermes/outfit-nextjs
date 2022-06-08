@@ -10,6 +10,7 @@ import PasswordComponent from "../../components/Password";
 import PasswordConfirmComponent from "../../components/Password/Confirm";
 
 import ProfileComponent from "../../components/Profile";
+import api from "../../config/api";
 import { routes } from "../../routes";
 import { postUser } from "../../services/user";
 
@@ -60,6 +61,8 @@ const SignUpPage: FC = () => {
                 sameSite: true,
             });
 
+            api.defaults.headers.common["x-access-token"] = response.data.token;
+
             toast({
                 title: "Account created",
                 description: "We've created your account for you",
@@ -68,6 +71,8 @@ const SignUpPage: FC = () => {
                 isClosable: true,
                 position: "top",
             });
+
+            localStorage.setItem("userID", response.data.user._id);
 
             router.push(routes.HOME);
         } else {

@@ -3,8 +3,19 @@ import { FC } from "react";
 import { GridItem } from "./interface";
 
 import mock from "../../mocks/home.json";
+import { getItems } from "../../services/item";
+import {
+    useApplicationContext,
+    withApplicationContext,
+} from "../../contexts/application";
 
 const GridOutfits: FC = () => {
+    const { userID } = useApplicationContext();
+
+    const handleItems = async () => {
+        await getItems(userID);
+    };
+
     return (
         <SimpleGrid
             my={{ base: "25px", lg: "30px" }}
@@ -48,4 +59,4 @@ const GridOutfits: FC = () => {
     );
 };
 
-export default GridOutfits;
+export default withApplicationContext(GridOutfits);
