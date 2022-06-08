@@ -26,7 +26,7 @@ const CreatePage: FC = () => {
     const handleCategory = async (ctgry: []) => {
         const response = await getItems(userID, ctgry);
 
-        if (Array.isArray(response)) {
+        if (response) {
             setItems(response);
             setStep(1);
         } else {
