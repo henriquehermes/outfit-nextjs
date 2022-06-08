@@ -1,4 +1,12 @@
-import { Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
+import {
+    Button,
+    Flex,
+    Image,
+    Text,
+    useToast,
+    Input,
+    FormLabel,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import {
@@ -6,33 +14,22 @@ import {
     withApplicationContext,
 } from "../../contexts/application";
 import { routes } from "../../routes";
-import { postItem } from "../../services/item";
+import { postOutfit } from "../../services/outfit";
 
-const SelectImage: React.FC = () => {
-    const fileInput = useRef<HTMLInputElement>(null);
+const SelectImage: React.FC<{ items?: any }> = ({ items }) => {
+    const inputTitle = useRef<HTMLInputElement>(null);
     const toast = useToast();
     const router = useRouter();
 
-    const [imagePreview, setImagePreview] = useState("");
-    const [file, setFile] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const { userID } = useApplicationContext();
 
-    function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
-        if (e.target.files && e.target.files[0]) {
-            const objectUrl = URL.createObjectURL(e.target.files[0]);
-
-            setFile(e.target.files[0]);
-            setImagePreview(objectUrl);
-        }
-    }
-
     const handleSubmit = async () => {
-        if (!file) {
+        if (!inputTitle.current) {
             toast({
                 title: "Error",
-                description: "Select one image",
+                description: "Select one image and give a title",
                 status: "error",
                 duration: 9000,
                 isClosable: true,
@@ -41,16 +38,17 @@ const SelectImage: React.FC = () => {
         } else {
             const formData = new FormData();
 
-            formData.append("image", file);
+            // formData.append("image", file);
+            formData.append("title", inputTitle?.current.value ?? "");
             formData.append("userID", userID);
 
             setIsLoading(true);
-            const response = await postItem(formData);
+            const response = await postOutfit(formData);
 
             if (response?.status === 200) {
                 toast({
-                    title: "Item created",
-                    description: "We've created your item for you",
+                    title: "Outfit created",
+                    description: "We've created your outfit for you",
                     status: "success",
                     duration: 9000,
                     isClosable: true,
@@ -72,44 +70,18 @@ const SelectImage: React.FC = () => {
         }
     };
 
+    console.log(items);
+
     return (
-        <Flex flex="1" flexDirection="column" align="center" justify="center">
-            <input
-                ref={fileInput}
-                onChange={handleImage}
-                style={{ display: "none" }}
-                type="file"
-                accept="image/png, image/jpg, image/jpeg"
-            />
-
-            {imagePreview && (
-                <Image
-                    maxWidth="500"
-                    maxHeight="500"
-                    objectFit="cover"
-                    h="auto"
-                    w="full"
-                    border="1px solid black"
-                    src={imagePreview}
-                    alt="image-preview"
-                />
-            )}
-
-            <Button
-                disabled={isLoading}
-                variant="outline"
-                onClick={() => {
-                    if (fileInput.current) fileInput.current.click();
-                }}
-                border="1px solid black"
-                w="full"
-                maxW="500px"
-                marginY="20px"
-                textTransform="uppercase"
-                fontWeight="900"
-            >
-                select an image
-            </Button>
+        <Flex
+            maxWidth="500px"
+            mx="auto"
+            width="full"
+            flex="1"
+            flexDirection="column"
+        >
+            <FormLabel marginTop="50px">Title</FormLabel>
+            <Input type="text" ref={inputTitle} />
 
             <Button
                 isLoading={isLoading}

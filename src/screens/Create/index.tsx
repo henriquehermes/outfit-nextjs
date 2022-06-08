@@ -46,7 +46,7 @@ const CreatePage: FC = () => {
             case 0:
                 return <ChooseCategory handleCategory={handleCategory} />;
             case 1:
-                return <SelectImage />;
+                return <SelectImage items={items} />;
             default:
                 return <ChooseCategory handleCategory={handleCategory} />;
         }
