@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+
 import {
     useApplicationContext,
     withApplicationContext,
@@ -16,7 +17,10 @@ import {
 import { routes } from "../../routes";
 import { postOutfit } from "../../services/outfit";
 
-const SelectImage: React.FC<{ items?: any }> = ({ items }) => {
+const SelectImage: React.FC<{ items?: any; categories: string[] }> = ({
+    items,
+    categories,
+}) => {
     const inputTitle = useRef<HTMLInputElement>(null);
     const toast = useToast();
     const router = useRouter();
@@ -70,7 +74,35 @@ const SelectImage: React.FC<{ items?: any }> = ({ items }) => {
         }
     };
 
-    console.log(items);
+    const keys = Object.values(items);
+
+    // const renderSlide = () => {
+    //     let temp = [];
+
+    //     for (let x = 0; x < keys.length; x++) {
+    //         const renderChildren: any = keys[x];
+
+    //         temp.push(
+    //             <Carousel
+    //                 autoPlay
+    //                 centerMode
+    //                 infiniteLoop
+    //                 swipeable
+    //                 showArrows={false}
+    //                 axis="horizontal"
+    //                 centerSlidePercentage={80}
+    //             >
+    //                 {renderChildren?.map((chld: any) => (
+    //                     <Flex key={chld._id} height="200px">
+    //                         <Image src={chld.image.location} alt={chld._id} />
+    //                     </Flex>
+    //                 ))}
+    //             </Carousel>,
+    //         );
+    //     }
+
+    //     return temp;
+    // };
 
     return (
         <Flex
@@ -80,6 +112,8 @@ const SelectImage: React.FC<{ items?: any }> = ({ items }) => {
             flex="1"
             flexDirection="column"
         >
+            {/* <Flex flexDirection="column">{renderSlide()}</Flex> */}
+
             <FormLabel marginTop="50px">Title</FormLabel>
             <Input type="text" ref={inputTitle} />
 

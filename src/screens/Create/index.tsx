@@ -22,9 +22,12 @@ const CreatePage: FC = () => {
 
     const [step, setStep] = useState(0);
     const [items, setItems] = useState<Item[]>([]);
+    const [categories, setCategories] = useState<string[]>([]);
 
     const handleCategory = async (ctgry: []) => {
         const response = await getItems(userID, ctgry);
+
+        setCategories(ctgry);
 
         if (response) {
             setItems(response);
@@ -46,11 +49,13 @@ const CreatePage: FC = () => {
             case 0:
                 return <ChooseCategory handleCategory={handleCategory} />;
             case 1:
-                return <SelectImage items={items} />;
+                return <SelectImage categories={categories} items={items} />;
             default:
                 return <ChooseCategory handleCategory={handleCategory} />;
         }
     }
+
+    console.log(items);
 
     return (
         <ContainerCustom>

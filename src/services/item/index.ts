@@ -16,27 +16,22 @@ export async function getItems(userID: string, categories: string[]) {
         const items = response.data?.items;
 
         if (items) {
-            let arrays: any = {};
+            const filteredArray = items.filter((value: Item) =>
+                categories.includes(value.category),
+            );
 
-            // this function create N arrays of categories
-            categories.forEach(function (x) {
-                arrays[x] = [];
-            });
+            const result = filteredArray.reduce(
+                (previousValue: any, currentValue: any) => {
+                    previousValue[currentValue.category] = [
+                        ...(previousValue[currentValue.category] || []),
+                        currentValue,
+                    ];
+                    return previousValue;
+                },
+                {},
+            );
 
-            for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
-                for (
-                    let catIndex = 0;
-                    catIndex < categories.length;
-                    catIndex++
-                ) {
-                    if (items[itemIndex].category === categories[catIndex]) {
-                        let actualCat = categories[catIndex];
-                        arrays[actualCat].push(items[itemIndex]);
-                    }
-                }
-            }
-
-            return arrays;
+            return result;
         } else {
             return response;
         }
